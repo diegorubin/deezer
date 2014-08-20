@@ -22,7 +22,7 @@
 
 using Gtk;
 
-namespace net.lunalab.deezer {
+namespace br.labluna.deezer {
 
 }
 
