@@ -50,7 +50,7 @@ add_executable(deezer
   ${VALA_C}
 )
 
-target_link_libraries(deezer -lm)
+target_link_libraries(-lm)
 
 install(TARGETS 
   deezer
@@ -59,8 +59,7 @@ DESTINATION
   bin
 )
 
-# The tests need a library version of all the pdf_presenter_stuff
-add_library(deezer_test_library 
+add_library(
   SHARED
   EXCLUDE_FROM_ALL
   ${VALA_C} deezer.h deezer.vapi
