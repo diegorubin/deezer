@@ -1,53 +1,28 @@
 find_package(PkgConfig)
+
 pkg_check_modules(GTK REQUIRED gtk+-3.0)
+pkg_check_modules(GLIB_REQUIRED glib-2.0)
 
-set(CFLAGS
-  ${GTK_CFLAGS} ${GTK_CFLAGS_OTHER}
-  ${GTHREAD_CFLAGS} ${GTHREAD_CFLAGS_OTHER}
-)
-add_definitions(${CFLAGS})
+add_definitions(${GLIB_CFLAGS} ${GLIB_CFLAGS_OTHER})
+add_definitions(${GTK_CFLAGS} ${GTK_CFLAGS_OTHER})
 
-set(LIBS
-  ${GTK_LIBRARIES}
-  ${GTHREAD_LIBRARIES}
-)
-link_libraries(${LIBS})
+link_libraries(${GLIB_LIBRARIES})
+link_libraries(${GTK_LIBRARIES})
 
-set(LIB_PATHS
-  ${GTK_LIBRARY_DIRS}
-  ${GTHREAD_LIBRARY_DIRS}
-)
-link_directories(${LIB_PATHS})
-
-set(VALA_SRC
-  deezer.vala
-)
-
-# Vala segfaults if its output dirs are not existant. Therefore make sure they
-# are there.
-macro(make_compile_directory directory)
-  if (NOT IS_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${directory}")
-    make_directory("${CMAKE_CURRENT_BINARY_DIR}/${directory}")
-  endif (NOT IS_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${directory}")
-endmacro(make_compile_directory)
+link_directories(${GLIB_LIBRARY_DIRS})
+link_directories(${GTK_LIBRARY_DIRS})
 
 vala_precompile(VALA_C
-  ${VALA_SRC}
-PACKAGES 
+  deezer.vala
+PACKAGES
   gtk+-3.0
   posix
-OPTIONS 
-  --thread
-  --debug
-GENERATE_HEADER
-  deezer
 GENERATE_VAPI
+  deezer
+GENERATE_HEADER
   deezer
 )
 
-add_executable(deezer  ${VALA_C})
-
-target_link_libraries()
-
-install(bin)
+add_executable(deezer ${VALA_C})
+add_library(deezer-clib ${VALA_C})
 

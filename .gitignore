@@ -1,4 +1,14 @@
-# temporary files
+# cmake files
+cmake_install.cmake
+CTestTestfile.cmake
 CMakeFiles/
 CMakeCache.txt
+Makefile
+
+# generated files
+deezer
+src/deezer.h
+src/deezer.vapi
+src/deezer_internal.h
+src/libdeezer-clib.a
 
