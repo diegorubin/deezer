@@ -22,10 +22,31 @@
 
 using Gtk;
 
-namespace br.labluna.deezer {
+namespace br.com.labluna.deezer {
 
-  public static int main (string[] args) {
-    Gtk.init (ref args);
+  public class Application: GLib.Object {
+
+    protected views.WindowMain windowMain;
+
+    public void run( string[] args ) {
+
+      Gdk.threads_init();
+      Gtk.init( ref args );
+
+      windowMain = new views.WindowMain();
+      windowMain.show_all();
+
+      // Enter the Glib eventloop
+      // Everything from this point on is completely signal based
+      Gdk.threads_enter();
+      Gtk.main();
+      Gdk.threads_leave();
+    }
+  }
+
+  public static int main ( string[] args ) {
+    var application = new Application();
+    application.run( args );
 
     return 0;
   }

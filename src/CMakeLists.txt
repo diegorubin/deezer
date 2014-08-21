@@ -12,8 +12,13 @@ link_libraries(${GTK_LIBRARIES})
 link_directories(${GLIB_LIBRARY_DIRS})
 link_directories(${GTK_LIBRARY_DIRS})
 
-vala_precompile(VALA_C
+set(VALA_SRC
+  views/window_main.vala
   deezer.vala
+)
+
+vala_precompile(VALA_C
+  ${VALA_SRC}
 PACKAGES
   gtk+-3.0
   posix

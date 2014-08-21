@@ -7,7 +7,9 @@ Makefile
 
 # generated files
 deezer
-src/deezer.h
+src/*.c
+src/views/*.c
+src/*.h
 src/deezer.vapi
 src/deezer_internal.h
 src/libdeezer-clib.a
