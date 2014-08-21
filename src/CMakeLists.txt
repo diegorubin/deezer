@@ -1,6 +1,5 @@
 find_package(PkgConfig)
 pkg_check_modules(GTK REQUIRED gtk+-3.0)
-pkg_check_modules(GTHREAD REQUIRED gthread-3.0)
 
 set(CFLAGS
   ${GTK_CFLAGS} ${GTK_CFLAGS_OTHER}
@@ -35,7 +34,7 @@ endmacro(make_compile_directory)
 vala_precompile(VALA_C
   ${VALA_SRC}
 PACKAGES 
-  gtk+-2.0
+  gtk+-3.0
   posix
 OPTIONS 
   --thread
@@ -46,22 +45,9 @@ GENERATE_VAPI
   deezer
 )
 
-add_executable(deezer
-  ${VALA_C}
-)
+add_executable(deezer  ${VALA_C})
 
-target_link_libraries(-lm)
+target_link_libraries()
 
-install(TARGETS 
-  deezer
-RUNTIME
-DESTINATION
-  bin
-)
-
-add_library(
-  SHARED
-  EXCLUDE_FROM_ALL
-  ${VALA_C} deezer.h deezer.vapi
-)
+install(bin)
 
