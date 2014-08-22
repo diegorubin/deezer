@@ -24,10 +24,19 @@ using Gtk;
 
 namespace br.com.labluna.deezer.views {
 
+  private WebView player;
+
   public class WindowMain : Window {
     public WindowMain() {
+
+      // window configuration
       this.title = "Deezer Client";
       this.destroy.connect ( Gtk.main_quit );
+
+      // player configuration
+      this.player = new WebView();
+      this.player.open("http://diegorubin.com");
+      add(player);
     }
   }
 
