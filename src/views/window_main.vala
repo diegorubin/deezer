@@ -21,12 +21,14 @@
  */
 
 using Gtk;
+using WebKit;
 
 namespace br.com.labluna.deezer.views {
 
-  private WebView player;
-
   public class WindowMain : Window {
+
+    protected WebView player;
+
     public WindowMain() {
 
       // window configuration
@@ -35,7 +37,6 @@ namespace br.com.labluna.deezer.views {
 
       // player configuration
       this.player = new WebView();
-      this.player.open("http://diegorubin.com");
       add(player);
     }
   }
